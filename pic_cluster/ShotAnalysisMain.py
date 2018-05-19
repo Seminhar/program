@@ -115,12 +115,23 @@ def shot_screenTxtCluster():
                        text3=re.textExtract(p1_deal1).strip()
                        text4=re.textExtract(p1_deal2).strip()
                        print "二次检测文本TTTTTTTT",text1.strip(),"___",text2.strip(),"___",text3.strip(),"____",text4.strip()
-                       if()
-                       ratio1=re.TextSimilarity(text1.strip(),text3.strip())
-                       ratio2=re.TextSimilarity(text2.strip(),text4.strip())
-                       ratio3=re.TextSimilarity(text1.strip(),text4.strip())
-                       ratio4=re.TextSimilarity(text2.strip(),text3.strip())
-                       print ratio1,ratio2,ratio3,ratio4
+                       if(len(text1.strip())>3 and len(text3.strip())>3):
+                           ratio1=re.TextSimilarity(text1.strip(),text3.strip())
+                           print "1和3比较",len(text1.strip()),len(text3.strip()),ratio1
+                       elif(len(text2.strip())>3 and len(text4.strip())>3):
+                           ratio2=re.TextSimilarity(text2.strip(),text4.strip())
+                           print "2和4比较",len(text2.strip()),len(text4.strip()),ratio2
+                       elif(len(text1.strip())>3 and len(text4.strip())>3):
+                           ratio3=re.TextSimilarity(text1.strip(),text4.strip())
+                           print "1和4比较",len(text1.strip()),len(text4.strip()),ratio3
+                       elif(len(text2.strip())>3 and len(text3.strip())>3):
+                           ratio4=re.TextSimilarity(text2.strip(),text3.strip())
+                           print "2和3比较",len(text2.strip()),len(text3.strip()),ratio4
+                       else:
+                           ratio1=0
+                           ratio2=0
+                           ratio3=0
+                           ratio4=0
                        if(ratio1>0.8 or ratio2>0.8 or ratio3>0.8 or ratio4>0.8):
                            print "二次检测相似"
                            ratio=1
