@@ -122,6 +122,7 @@ def segmentToPart(im):
     w=im_w-x
     h=im_h*(1/4)*1.0    
     im1=im.crop((x,y,x+w,y+h))
+    img1 = im1.resize((int(w)*2,int(h)*2),Image.ANTIALIAS)
     
     im_w=im.size[0]
     im_h=im.size[1]
@@ -130,14 +131,20 @@ def segmentToPart(im):
     w=im_w-x
     h=im_h*(1/3)*1.0
     im2=im.crop((x,y,x+w,y+h))
+    img2 = im2.resize((int(w)*2,int(h)*2),Image.ANTIALIAS)
+# =============================================================================
+#     img1=transform.rescale(np.array(im1), 2).shape
+#     img2=transform.rescale(np.array(im2), 2).shape
+# =============================================================================
     
     plt.figure()    
     plt.subplot(121)
-    plt.imshow(im1)  
+    plt.imshow(img1)   
     plt.subplot(122)
-    plt.imshow(im2)    
+    plt.imshow(img2)    
     plt.show()
-    return im1,im2
+   
+    return img1,img2
 # =============================================================================
 # 最大类间方差法       
 # =============================================================================
@@ -243,11 +250,14 @@ if __name__=="__main__":
     pic_end=4671
     for i in range(pic_begins,pic_end):          
         p1=Image.open(address + str(i)+ '.jpg')
-        p1_deal=image_deal2(p1)
+        p1_1,p1_2=image_deal2(p1)        
         for j in range(i,pic_end):
             p2=Image.open(address + str(j)+ '.jpg')
-            p2_deal=image_deal(p2)
-            textRecg(p1_deal,p2_deal)
+            p2_1,p2_2=image_deal2(p2)
+            textRecg(p1_1,p2_1)
+            textRecg(p1_2,p2_2)
+            textRecg(p1_2,p2_1)
+            textRecg(p1_1,p2_2)
 
 
 
