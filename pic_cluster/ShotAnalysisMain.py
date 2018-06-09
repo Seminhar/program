@@ -170,7 +170,7 @@ def shot_screenTxtCluster():
                         print  "%%%%%%%%%%%%前一组第一个值",new_order[new_order_L-2]
                         print  "%%%%%%%%%%%%新一组最后的值",p2_l
                         print   new_order
-                    elif(i>0 and new_order[new_order_L-3]==p1_l):
+                    elif(i>0 and new_order[new_order_L-4]==p1_p):
                         for m in range(4):
                             new_order.remove(new_order[new_order_L-m])
                         print "删除数据后",new_order
@@ -224,14 +224,16 @@ def shot_screenTxtCluster():
                         print "向后探测一步"
                         print "1前",p1_p
                         print "1后",p1_l
-                        print "1前",p2_p
-                        print "1后",p2_l
+                        print "2前",p2_p
+                        print "2后",p2_l
                         count_0=0
                         count_null=0
                         if(i>2):
                             p1_p=order_FSX_R[index_start1-2]
                             p1_l=order_FSX_R[index_end1-2]
-                            p1_index = p1_p        
+                            p1_index = p1_p
+                        print "更1前",p1_p
+                        print "更1后",p1_l
                         frame=10
                         continue
                     elif(repeat==4):                    
@@ -240,7 +242,7 @@ def shot_screenTxtCluster():
                         if(i>0 and new_order[new_order_L-1]==p1_l):                    
                             total=total+temp_
                             print "不融合的是：",temp_
-                        elif(i>0 and new_order[new_order_L-3]==p1_l):
+                        elif(i>0 and new_order[new_order_L]==p2_p-1):
                             total=total+temp_
                             print "不融合的是：",temp_
                         else:
