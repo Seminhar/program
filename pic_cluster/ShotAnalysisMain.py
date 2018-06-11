@@ -14,10 +14,10 @@ import fileTools as ft
 import random
 from PIL import Image
 
-add_pic='E:\\python\\pic\\201710162100\\'
-add_outArray_picCluster="E:\\Python\\cluster result\\201710162100\\201710162100.npy"
-add_outArray_txtCluster="E:\\Python\\cluster result\\201710162100\\201710162100_t1.npy"
-add_inArray_wav='E:/python/audio/wav/201710162100/201710162100.npy'
+add_pic='E:\\python\\pic\\201709302100\\'
+add_outArray_picCluster="E:\\Python\\cluster result\\201709302100\\201709302100.npy"
+add_outArray_txtCluster="E:\\Python\\cluster result\\201709302100\\201709302100_t1.npy"
+add_inArray_wav='E:/python/audio/wav/201709302100/201709302100.npy'
 
 accept=77
 #视频长度  毫秒
@@ -109,10 +109,14 @@ def shot_screenTxtCluster():
     # =============================================================================
     #  相似度统计           
     # =============================================================================
+                ratio1=0 
+                ratio2=0
+                ratio3=0
+                ratio4=0
                 if(len(text1)>3 and len(text2)>3):        
                     ratio=re.TextSimilarity(text1.strip(),text2.strip())
                     print "第一次比较得到的相似度",ratio
-                    if(ratio<0.6 and ratio>0.25):
+                    if(ratio<0.75 and ratio>0.25):
                        print "二次检测！！！！！"
                        p1_deal1,p1_deal2=re.image_deal2(Image.open(add_pic + str(p1_index)+ '.jpg'))
                        text1=re.textExtract(p1_deal1).strip().replace("  ","")
@@ -139,7 +143,7 @@ def shot_screenTxtCluster():
                            ratio2=0
                            ratio3=0
                            ratio4=0
-                       if(ratio1>0.8 or ratio2>0.8 or ratio3>0.8 or ratio4>0.8):
+                       if(ratio1>0.75 or ratio2>0.75 or ratio3>0.75 or ratio4>0.75):
                            print "二次检测判定相似！！！！！"
                            ratio=1
                 else:
@@ -183,8 +187,8 @@ def shot_screenTxtCluster():
                         total=total+temp                         
                         new_order=np.array(total,int)
                         print   new_order
-                    index_start1=index_start1
-                    index_end1=index_end2
+                    index_start1=index_start1+2
+                    index_end1=index_end1+2
                     index_start2=index_start2+2
                     index_end2=index_end2+2
                     print "融合的是：",p1_p,p1_l,p2_p,p2_l
@@ -196,8 +200,8 @@ def shot_screenTxtCluster():
                     total=total+temp                         
                     new_order=np.array(total,int)
                     print   new_order
-                    index_start1=index_start1
-                    index_end1=index_end2
+                    index_start1=index_start1+2
+                    index_end1=index_end1+2
                     index_start2=index_start2+2
                     index_end2=index_end2+2
                      
@@ -242,7 +246,7 @@ def shot_screenTxtCluster():
                         if(i>0 and new_order[new_order_L-1]==p1_l):                    
                             total=total+temp_
                             print "不融合的是：",temp_
-                        elif(i>0 and new_order[new_order_L]==p2_p-1):
+                        elif(i>0 and new_order[new_order_L-1]==p2_p-1):
                             total=total+temp_
                             print "不融合的是：",temp_
                         else:
